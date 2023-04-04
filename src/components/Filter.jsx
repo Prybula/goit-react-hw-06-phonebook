@@ -1,6 +1,8 @@
-import PropTypes from 'prop-types';
+import { filterContact } from 'redux/filterSlice';
+import { useDispatch } from 'react-redux';
 
-export const Filter = ({ filter, value }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
   return (
     <form>
       <label>
@@ -10,15 +12,9 @@ export const Filter = ({ filter, value }) => {
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          onChange={filter}
-          value={value}
+          onChange={(event) => dispatch(filterContact(event.target.value))}
         ></input>
       </label>
     </form>
   );
-};
-
-Filter.propTypes = {
-  filter: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
 };
